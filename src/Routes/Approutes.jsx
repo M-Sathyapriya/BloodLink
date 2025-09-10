@@ -17,6 +17,10 @@ import Devihospital from '../components/viewh1';
 import Corporation from '../components/viewh2';
 import Port from '../components/viewh3';
 import Hospital from '../Pages/Hospital/Hospital';
+import Donorlogin from '../components/Donorlogin';
+import Contact from '../Pages/Contact/Contact';
+import Donor from '../Pages/Donor/Donor';
+import DonationForm from '../Pages/Donor/Donorpage';
 
 function AppRoutes() {
   return (
@@ -39,6 +43,10 @@ function AppRoutes() {
         <Route path='/hospitalview2' element={ <Corporation/>}/>
         <Route path='/hospitalview3' element={ <Port/>}/>
         <Route path='/hospital' element={ <Hospital/>}/>
+        <Route path='/Donorlogin' element={<Donorlogin/>}/>
+        <Route path='/Contact' element={<Contact/>}/>
+        <Route path='/DonateNow' element={<Donor/>}/>
+        <Route path='/DonateNow'  element={<DonationForm/>}/>
       </Routes>
       <Footer />  
     </>

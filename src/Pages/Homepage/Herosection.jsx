@@ -136,9 +136,9 @@ const HeroSection = () => {
             p: 3,
             flex: 1,
             minHeight: "120px",
-            cursor: "pointer", // show pointer cursor
+            cursor: "pointer",
           }}
-          onClick={() => navigate("/RegistrationForm1")} // navigate to RegistrationForm1
+          onClick={() => navigate("/RegistrationForm1")}
         >
           <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
             Register Now
@@ -161,7 +161,9 @@ const HeroSection = () => {
             p: 3,
             flex: 1,
             minHeight: "120px",
+            cursor: "pointer",
           }}
+          onClick={() => navigate("/Donorlogin")} // ✅ Navigate to DonateNow page
         >
           <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
             Donate now

@@ -7,8 +7,21 @@ import {
   IconButton,
 } from "@mui/material";
 import { Facebook, Twitter, Instagram, Pinterest } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom"; // ✅ Import navigate hook
 
 const Footer = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate
+
+  // ✅ Define routes for quick links
+  const quickLinks = [
+    { label: "Services", path: "/services" },
+    { label: "About Us", path: "/about" },
+    { label: "Contact Us", path: "/Contact" },
+    { label: "Privacy Policy", path: "/privacy-policy" },
+    { label: "Terms And Conditions", path: "/terms" },
+    { label: "Faq", path: "/faq" },
+  ];
+
   return (
     <Box sx={{ mt: 5 }}>
       {/* 🔴 Top Red Banner */}
@@ -24,11 +37,11 @@ const Footer = () => {
       >
         <Box>
           <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-            Lets Change the World,Join Us Now!
+            Lets Change the World, Join Us Now!
           </Typography>
           <Typography variant="body1" sx={{ maxWidth: 600 }}>
-            Bloodlink is an platform that helps to streamline blood donation and
-            blood request which puts the power to save a life in the palm of
+            Bloodlink is a platform that helps to streamline blood donation and
+            blood requests which puts the power to save a life in the palm of
             your hand.
           </Typography>
         </Box>
@@ -42,6 +55,7 @@ const Footer = () => {
             px: 3,
             "&:hover": { bgcolor: "#f5f5f5" },
           }}
+          onClick={() => navigate("/contact")} // ✅ Navigate to Contact Page
         >
           Contact Us
         </Button>
@@ -49,7 +63,7 @@ const Footer = () => {
 
       {/* ⚫ Black Footer */}
       <Box sx={{ bgcolor: "#111111", color: "white", p: 5 }}>
-        {/* 4 Columns in SAME ROW */}
+        {/* 4 Columns */}
         <Box
           sx={{
             display: "flex",
@@ -77,20 +91,18 @@ const Footer = () => {
           </Box>
 
           {/* Quick Links */}
-          <Box sx={{ width: "20%" }}>
+          <Box sx={{ width: "20%", cursor: "pointer" }}>
             <Typography variant="h6" sx={{ mb: 2 }}>
               Quick Links
             </Typography>
-            {[
-              "Services",
-              "About Us",
-              "Contact Us",
-              "Privacy Policy",
-              "Terms And Conditions",
-              "Faq",
-            ].map((item, i) => (
-              <Typography key={i} variant="body2" sx={{ mb: 1 }}>
-                <span style={{ color: "red" }}>»</span> {item}
+            {quickLinks.map((item, i) => (
+              <Typography
+                key={i}
+                variant="body2"
+                sx={{ mb: 1, "&:hover": { color: "red" } }}
+                onClick={() => navigate(item.path)}
+              >
+                <span style={{ color: "red" }}>»</span> {item.label}
               </Typography>
             ))}
           </Box>
@@ -198,46 +210,19 @@ const Footer = () => {
 
           {/* Social Media */}
           <Box>
-            <IconButton
-              sx={{
-                color: "white",
-                bgcolor: "darkred",
-                m: 0.5,
-                "&:hover": { bgcolor: "red" },
-              }}
-            >
-              <Facebook />
-            </IconButton>
-            <IconButton
-              sx={{
-                color: "white",
-                bgcolor: "darkred",
-                m: 0.5,
-                "&:hover": { bgcolor: "red" },
-              }}
-            >
-              <Twitter />
-            </IconButton>
-            <IconButton
-              sx={{
-                color: "white",
-                bgcolor: "darkred",
-                m: 0.5,
-                "&:hover": { bgcolor: "red" },
-              }}
-            >
-              <Instagram />
-            </IconButton>
-            <IconButton
-              sx={{
-                color: "white",
-                bgcolor: "darkred",
-                m: 0.5,
-                "&:hover": { bgcolor: "red" },
-              }}
-            >
-              <Pinterest />
-            </IconButton>
+            {[Facebook, Twitter, Instagram, Pinterest].map((Icon, i) => (
+              <IconButton
+                key={i}
+                sx={{
+                  color: "white",
+                  bgcolor: "darkred",
+                  m: 0.5,
+                  "&:hover": { bgcolor: "red" },
+                }}
+              >
+                <Icon />
+              </IconButton>
+            ))}
           </Box>
         </Box>
 

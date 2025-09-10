@@ -148,7 +148,7 @@ const Navbar = () => {
                 bgcolor: "#B30e08",
                 borderRadius: "20px",
                 textTransform: "none",
-                "&:hover": { bgcolor: "darkred" },
+                "&:hover": { bgcolor: "red" },
               }}
             >
               Recipient Login
@@ -156,12 +156,12 @@ const Navbar = () => {
 
             <Button
               variant="contained"
-              onClick={() => navigate("/donor-login")}
+              onClick={() => navigate("/Donorlogin")}
               sx={{
                 bgcolor: "#B30e08",
                 borderRadius: "20px",
                 textTransform: "none",
-                "&:hover": { bgcolor: "darkred" },
+                "&:hover": { bgcolor: "red" },
               }}
             >
               Donor Login
