@@ -21,6 +21,7 @@ import Donorlogin from '../components/Donorlogin';
 import Contact from '../Pages/Contact/Contact';
 import Donor from '../Pages/Donor/Donor';
 import DonationForm from '../Pages/Donor/Donorpage';
+import TermsAndConditions from '../Pages/Termsand condition/terms';
 
 function AppRoutes() {
   return (
@@ -47,6 +48,7 @@ function AppRoutes() {
         <Route path='/Contact' element={<Contact/>}/>
         <Route path='/DonateNow' element={<Donor/>}/>
         <Route path='/DonateNow'  element={<DonationForm/>}/>
+        <Route path='/terms' element={<TermsAndConditions/>}/>
       </Routes>
       <Footer />  
     </>
