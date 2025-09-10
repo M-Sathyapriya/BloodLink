@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Box, Typography,Link } from '@mui/material';
+=======
+import { Box, Typography, Link } from '@mui/material';
+>>>>>>> Vishali
 import PhoneIcon from '@mui/icons-material/Phone';
 import RoomIcon from '@mui/icons-material/Room';
 import EmailIcon from '@mui/icons-material/Email';
