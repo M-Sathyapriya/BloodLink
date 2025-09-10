@@ -1,12 +1,11 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
-import { useNavigate } from "react-router-dom"; // import navigation hook
+import { useNavigate } from "react-router-dom";
 import hero1 from "./../../Assets/hero1.png";
 
-
 const HeroSection = () => {
-  const navigate = useNavigate(); // initialize navigate
+  const navigate = useNavigate(); 
 
   return (
     <Box
