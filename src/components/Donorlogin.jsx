@@ -85,6 +85,10 @@ const Donorlogin = () => {
     if (validate()) {
       alert("Login successful!");
       localStorage.setItem("loginData", JSON.stringify(formData));
+
+      // ✅ Redirect to DonateNow page
+      navigate("/DonateNow");
+
       setFormData({
         name: "",
         phone: "",
@@ -231,7 +235,6 @@ const Donorlogin = () => {
                       fontWeight: 600,
                       "&:hover": {
                         backgroundColor: "red",
-                        
                       },
                     }}
                   >
