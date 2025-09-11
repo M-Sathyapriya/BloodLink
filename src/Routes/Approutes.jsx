@@ -28,6 +28,8 @@ import HospitalManagement from "../Pages/admin/HospitalManagement";
 import BloodBankManagement from "../Pages/admin/BloodBankManagement";
 import Service from '../Pages/Services/Servicemain';
 import FAQ from '../Pages/faq/faq';
+import Termsandcondition from '../Pages/Termsandcondition/TermsandCondition';
+import Privacy from '../Pages/Privacypolicy/Privacypolicy';
 
 function AppRoutes() {
   return (
@@ -62,6 +64,8 @@ function AppRoutes() {
         <Route path="/admin/bloodbanks" element={<BloodBankManagement />} />
         <Route path='/services' element={<Service/>}/>
         <Route path='/faq' element={<FAQ/>}/>
+        <Route path='/terms' element={<Termsandcondition/>}/>
+        <Route path='/Privacypolicy' element={<Privacy/>}/>
       </Routes>
       <Footer />  
     </>

@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom"; // ✅ import Link
+import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import aboutban1 from "../../Assets/b.png"; // your banner image
 
-const Bannerfaq = () => {
+const Donorbanner = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate function
+
   return (
     <Box sx={{ position: "relative", width: "100%", height: { xs: 250, md: 400 } }}>
       {/* Background Image */}
@@ -58,12 +60,12 @@ const Bannerfaq = () => {
             fontWeight: "bold",
           }}
         >
-          <Link
-            to="/"
-            style={{ color: "#fff", textDecoration: "none" }}
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/")} // ✅ Navigate to home
           >
             HOME
-          </Link>{" "}
+          </span>
           <span style={{ color: "red" }}> / Donate Now</span>
         </Typography>
       </Box>

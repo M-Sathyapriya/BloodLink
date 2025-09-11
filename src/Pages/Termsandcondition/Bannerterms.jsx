@@ -3,8 +3,8 @@ import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import aboutban1 from "../../Assets/b.png"; // your banner image
 
-const Bannerblood = () => {
-  const navigate = useNavigate(); // ✅ Initialize navigate
+const Termsbanner = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate function
 
   return (
     <Box sx={{ position: "relative", width: "100%", height: { xs: 250, md: 400 } }}>
@@ -49,7 +49,7 @@ const Bannerblood = () => {
             textTransform: "capitalize",
           }}
         >
-          Find Blood Banks
+          Terms And Condition
         </Typography>
 
         {/* Breadcrumb */}
@@ -62,15 +62,15 @@ const Bannerblood = () => {
         >
           <span
             style={{ cursor: "pointer" }}
-            onClick={() => navigate("/")} // ✅ Navigate to Home
+            onClick={() => navigate("/")} // ✅ Navigate to home
           >
             HOME
           </span>
-          <span style={{ color: "red" }}> / Find Blood Banks</span>
+          <span style={{ color: "red" }}> / Terms And Condition</span>
         </Typography>
       </Box>
     </Box>
   );
 };
 
-export default Bannerblood;
+export default Termsbanner;
