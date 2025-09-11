@@ -36,7 +36,6 @@ function AppRoutes() {
         <Route path='/resetpassword' element={<ResetPassword/>}/>
         <Route path='/verifyotp' element={<OtpVerify/>}/>
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-
         <Route path='/view' element={ <KGHospitalInfo/>}/>
         <Route path='/view2' element={ <IMA/>}/>
         <Route path='/view3' element={ <Kuppu/>}/>
