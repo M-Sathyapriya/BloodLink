@@ -21,6 +21,11 @@ import Donorlogin from '../components/Donorlogin';
 import Contact from '../Pages/Contact/Contact';
 import Donor from '../Pages/Donor/Donor';
 import DonationForm from '../Pages/Donor/Donorpage';
+import AdminDashboard from "../Pages/admin/AdminDashboard";
+import DonorManagement from "../Pages/admin/DonorManagement";
+import RecipientManagement from "../Pages/admin/RecipientManagement";
+import HospitalManagement from "../Pages/admin/HospitalManagement";
+import BloodBankManagement from "../Pages/admin/BloodBankManagement";
 
 function AppRoutes() {
   return (
@@ -47,6 +52,12 @@ function AppRoutes() {
         <Route path='/Contact' element={<Contact/>}/>
         <Route path='/DonateNow' element={<Donor/>}/>
         <Route path='/DonateNow'  element={<DonationForm/>}/>
+        <Route path="/" element={<AdminDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/donors" element={<DonorManagement />} />
+        <Route path="/admin/recipients" element={<RecipientManagement />} />
+        <Route path="/admin/hospitals" element={<HospitalManagement />} />
+        <Route path="/admin/bloodbanks" element={<BloodBankManagement />} />
       </Routes>
       <Footer />  
     </>

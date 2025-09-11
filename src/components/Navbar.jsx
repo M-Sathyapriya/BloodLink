@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <Box>
       {/* Top Black Bar */}
-      <AppBar position="static" sx={{ bgcolor: "black", height: 60 }}>
+      <AppBar position="static" sx={{ bgcolor: "black", height: 60, zIndex: 1300 }}>
         <Toolbar sx={{ justifyContent: "space-between", minHeight: 40 }}>
           {/* Left Section - Phone + Email */}
           <Box display="flex" alignItems="center" gap={4}>
