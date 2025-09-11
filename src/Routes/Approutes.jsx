@@ -26,6 +26,8 @@ import DonorManagement from "../Pages/admin/DonorManagement";
 import RecipientManagement from "../Pages/admin/RecipientManagement";
 import HospitalManagement from "../Pages/admin/HospitalManagement";
 import BloodBankManagement from "../Pages/admin/BloodBankManagement";
+import Service from '../Pages/Services/Servicemain';
+import FAQ from '../Pages/faq/faq';
 
 function AppRoutes() {
   return (
@@ -58,6 +60,8 @@ function AppRoutes() {
         <Route path="/admin/recipients" element={<RecipientManagement />} />
         <Route path="/admin/hospitals" element={<HospitalManagement />} />
         <Route path="/admin/bloodbanks" element={<BloodBankManagement />} />
+        <Route path='/services' element={<Service/>}/>
+        <Route path='/faq' element={<FAQ/>}/>
       </Routes>
       <Footer />  
     </>

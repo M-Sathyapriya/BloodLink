@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography, Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom"; // ✅ import Link
 
 // Import images
 import bloodDonationImg from "./../../Assets/s1.png";
@@ -55,6 +56,8 @@ const Services = () => {
           </Typography>
           <Button
             variant="contained"
+            component={Link}
+            to="/DonateNow" // ✅ navigate to page
             sx={{
               bgcolor: "#A71D1D",
               textTransform: "none",
@@ -81,6 +84,8 @@ const Services = () => {
           </Typography>
           <Button
             variant="contained"
+            component={Link}
+            to="/hospital" // ✅ navigate to page
             sx={{
               bgcolor: "#A71D1D",
               textTransform: "none",
@@ -139,6 +144,8 @@ const Services = () => {
           </Typography>
           <Button
             variant="contained"
+            component={Link}
+            to="/bloodbank" // ✅ navigate to page
             sx={{
               bgcolor: "#A71D1D",
               textTransform: "none",
