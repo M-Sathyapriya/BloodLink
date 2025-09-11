@@ -21,8 +21,7 @@ import Donorlogin from '../components/Donorlogin';
 import Contact from '../Pages/Contact/Contact';
 import Donor from '../Pages/Donor/Donor';
 import DonationForm from '../Pages/Donor/Donorpage';
-import TermsAndConditions from '../Pages/Termsand condition/terms';
-import Termsandcondition from '../Pages/Termsand condition/TermsandCondition';
+import Termsandcondition from '../Pages/Termsandcondition/TermsandCondition';
 import Privacy from '../Pages/Privacypolicy/Privacypolicy';
 
 function AppRoutes() {
