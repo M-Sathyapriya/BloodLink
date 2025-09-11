@@ -16,7 +16,6 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-// Options
 const bloodGroups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 const states = ["Tamil Nadu", "Kerala", "Karnataka", "Andhra Pradesh"];
 const cities = ["Chennai", "Coimbatore", "Madurai", "Bangalore", "Hyderabad"];
