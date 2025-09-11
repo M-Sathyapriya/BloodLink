@@ -21,6 +21,7 @@ import Donorlogin from '../components/Donorlogin';
 import Contact from '../Pages/Contact/Contact';
 import Donor from '../Pages/Donor/Donor';
 import DonationForm from '../Pages/Donor/Donorpage';
+import Service from '../Pages/Services/Servicemain';
 
 function AppRoutes() {
   return (
@@ -47,6 +48,7 @@ function AppRoutes() {
         <Route path='/Contact' element={<Contact/>}/>
         <Route path='/DonateNow' element={<Donor/>}/>
         <Route path='/DonateNow'  element={<DonationForm/>}/>
+        <Route path='/service' element={<Service/>}/>
       </Routes>
       <Footer />  
     </>

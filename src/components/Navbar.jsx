@@ -103,7 +103,7 @@ const Navbar = () => {
 
             <Typography
               component={RouterLink}
-              to="/services"
+              to="/service"
               sx={{
                 fontWeight: "bold",
                 textDecoration: "none",
