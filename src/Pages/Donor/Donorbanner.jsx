@@ -73,4 +73,4 @@ const Donorbanner = () => {
   );
 };
 
-export default Bannerfaq;
+export default Donorbanner;

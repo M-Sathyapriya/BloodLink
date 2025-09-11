@@ -73,4 +73,4 @@ const Bannercontact = () => {
   );
 };
 
-export default Bannerfaq;
+export default Bannercontact;
