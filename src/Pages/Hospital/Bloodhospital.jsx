@@ -1,8 +1,11 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import aboutban1 from "../../Assets/b.png"; // your banner image
 
 const Bannerhospital = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate function
+
   return (
     <Box sx={{ position: "relative", width: "100%", height: { xs: 250, md: 400 } }}>
       {/* Background Image */}
@@ -57,7 +60,13 @@ const Bannerhospital = () => {
             fontWeight: "bold",
           }}
         >
-          HOME <span style={{ color: "red" }}> /Find Hospital</span>
+          <span
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+            onClick={() => navigate("/")} // ✅ Navigate to home
+          >
+            HOME
+          </span>
+          <span style={{ color: "red" }}> / Find Hospital</span>
         </Typography>
       </Box>
     </Box>

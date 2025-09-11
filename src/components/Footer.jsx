@@ -7,6 +7,8 @@ import {
   IconButton,
 } from "@mui/material";
 import { Facebook, Twitter, Instagram, Pinterest } from "@mui/icons-material";
+import image1 from "../Assets/footer1.png";
+import image2 from "../Assets/footer2.png"
 import { useNavigate } from "react-router-dom"; // ✅ Import navigate hook
 
 const Footer = () => {
@@ -17,7 +19,7 @@ const Footer = () => {
     { label: "Services", path: "/services" },
     { label: "About Us", path: "/about" },
     { label: "Contact Us", path: "/Contact" },
-    { label: "Privacy Policy", path: "/privacy-policy" },
+    { label: "Privacy Policy", path: "/Privacypolicy" },
     { label: "Terms And Conditions", path: "/terms" },
     { label: "Faq", path: "/faq" },
   ];
@@ -133,7 +135,7 @@ const Footer = () => {
 
             <Box display="flex" alignItems="center" gap={2} mb={2}>
               <img
-                src="https://via.placeholder.com/60"
+                src={image1}
                 alt="news1"
                 style={{ borderRadius: "4px" }}
               />
@@ -149,7 +151,7 @@ const Footer = () => {
 
             <Box display="flex" alignItems="center" gap={2}>
               <img
-                src="https://via.placeholder.com/60"
+                src={image2}
                 alt="news2"
                 style={{ borderRadius: "4px" }}
               />

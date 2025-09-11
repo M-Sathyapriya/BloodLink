@@ -7,7 +7,7 @@ const ImageExample = () => {
   <img 
     src={sampleImage} 
     alt="Sample" 
-    style={{ width: "1000px", borderRadius: "10px" }} 
+    style={{ width: "1500px", borderRadius: "10px" }} 
   />
 </div>
   );

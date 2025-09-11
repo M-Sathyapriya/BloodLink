@@ -3,16 +3,18 @@ import Termsbanner from "./Bannerterms"
 import ImageExample from "./Imageterm"
 import TermsAndConditions from "./terms"
 import TwoImagesRow from "./Imagesec"
+import Terms from "./terms"
 
-const termsandcondition =() =>{
+const Termsandcondition =() =>{
     return(
         <Box>
             <Termsbanner/>
             <ImageExample/>
-            <TermsAndConditions/>
+            <Terms/>
             <TwoImagesRow/>
+            
         </Box>
     )
 }
 
-export default termsandcondition;
+export default Termsandcondition;

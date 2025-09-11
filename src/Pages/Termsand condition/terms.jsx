@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Divider } from "@mui/material";
 
-const TermsAndConditions = () => {
+const Terms = () => {
   return (
     <Box
       sx={{
@@ -171,4 +171,4 @@ const TermsAndConditions = () => {
   );
 };
 
-export default TermsAndConditions;
+export default Terms;

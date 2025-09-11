@@ -22,6 +22,8 @@ import Contact from '../Pages/Contact/Contact';
 import Donor from '../Pages/Donor/Donor';
 import DonationForm from '../Pages/Donor/Donorpage';
 import TermsAndConditions from '../Pages/Termsand condition/terms';
+import Termsandcondition from '../Pages/Termsand condition/TermsandCondition';
+import Privacy from '../Pages/Privacypolicy/Privacypolicy';
 
 function AppRoutes() {
   return (
@@ -48,7 +50,8 @@ function AppRoutes() {
         <Route path='/Contact' element={<Contact/>}/>
         <Route path='/DonateNow' element={<Donor/>}/>
         <Route path='/DonateNow'  element={<DonationForm/>}/>
-        <Route path='/terms' element={<TermsAndConditions/>}/>
+        <Route path='/terms' element={<Termsandcondition/>}/>
+        <Route path='/Privacypolicy' element={<Privacy/>}/>
       </Routes>
       <Footer />  
     </>
