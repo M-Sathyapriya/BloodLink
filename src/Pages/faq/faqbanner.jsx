@@ -47,7 +47,7 @@ const Bannerfaq = () => {
             textTransform: "capitalize",
           }}
         >
-          Services
+          FAQ
         </Typography>
 
         {/* Breadcrumb with navigation */}
@@ -64,7 +64,7 @@ const Bannerfaq = () => {
           >
             HOME
           </Link>{" "}
-          <span style={{ color: "red" }}> / Services</span>
+          <span style={{ color: "red" }}> / FAQ</span>
         </Typography>
       </Box>
     </Box>

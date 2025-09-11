@@ -22,6 +22,7 @@ import Contact from '../Pages/Contact/Contact';
 import Donor from '../Pages/Donor/Donor';
 import DonationForm from '../Pages/Donor/Donorpage';
 import Service from '../Pages/Services/Servicemain';
+import FAQ from '../Pages/faq/faq';
 
 function AppRoutes() {
   return (
@@ -48,7 +49,8 @@ function AppRoutes() {
         <Route path='/Contact' element={<Contact/>}/>
         <Route path='/DonateNow' element={<Donor/>}/>
         <Route path='/DonateNow'  element={<DonationForm/>}/>
-        <Route path='/service' element={<Service/>}/>
+        <Route path='/services' element={<Service/>}/>
+        <Route path='/faq' element={<FAQ/>}/>
       </Routes>
       <Footer />  
     </>

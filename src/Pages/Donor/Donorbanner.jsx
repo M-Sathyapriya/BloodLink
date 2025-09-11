@@ -1,8 +1,9 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { Link } from "react-router-dom"; // ✅ import Link
 import aboutban1 from "../../Assets/b.png"; // your banner image
 
-const Donorbanner = () => {
+const Bannerfaq = () => {
   return (
     <Box sx={{ position: "relative", width: "100%", height: { xs: 250, md: 400 } }}>
       {/* Background Image */}
@@ -46,10 +47,10 @@ const Donorbanner = () => {
             textTransform: "capitalize",
           }}
         >
-          Donate now
+          Donate Now
         </Typography>
 
-        {/* Breadcrumb */}
+        {/* Breadcrumb with navigation */}
         <Typography
           sx={{
             fontSize: { xs: "1rem", md: "1.2rem" },
@@ -57,11 +58,17 @@ const Donorbanner = () => {
             fontWeight: "bold",
           }}
         >
-          HOME <span style={{ color: "red" }}> / DONATE NOW</span>
+          <Link
+            to="/"
+            style={{ color: "#fff", textDecoration: "none" }}
+          >
+            HOME
+          </Link>{" "}
+          <span style={{ color: "red" }}> / Donate Now</span>
         </Typography>
       </Box>
     </Box>
   );
 };
 
-export default Donorbanner;
+export default Bannerfaq;

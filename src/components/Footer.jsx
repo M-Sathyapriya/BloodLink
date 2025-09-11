@@ -9,6 +9,10 @@ import {
 import { Facebook, Twitter, Instagram, Pinterest } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom"; // ✅ Import navigate hook
 
+import footer1 from "../Assets/footer1.png";
+import footer2 from "../Assets/footer2.png";
+
+
 const Footer = () => {
   const navigate = useNavigate(); // ✅ Initialize navigate
 
@@ -133,9 +137,9 @@ const Footer = () => {
 
             <Box display="flex" alignItems="center" gap={2} mb={2}>
               <img
-                src="https://via.placeholder.com/60"
+                src={footer1} // ✅ Local image
                 alt="news1"
-                style={{ borderRadius: "4px" }}
+                style={{ borderRadius: "4px", width: "60px", height: "60px" }}
               />
               <Box>
                 <Typography variant="body2">
@@ -149,9 +153,9 @@ const Footer = () => {
 
             <Box display="flex" alignItems="center" gap={2}>
               <img
-                src="https://via.placeholder.com/60"
+                src={footer2} // ✅ Local image
                 alt="news2"
-                style={{ borderRadius: "4px" }}
+                style={{ borderRadius: "4px", width: "60px", height: "60px" }}
               />
               <Box>
                 <Typography variant="body2">
