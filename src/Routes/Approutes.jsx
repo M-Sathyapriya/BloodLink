@@ -1,5 +1,6 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
 import Home from '../Pages/Homepage/Home';
 import RegistrationForm1 from '../components/Registeration1';
 import Footer from '../components/Footer';
@@ -30,45 +31,66 @@ import Service from '../Pages/Services/Servicemain';
 import FAQ from '../Pages/faq/faq';
 import Termsandcondition from '../Pages/Termsandcondition/TermsandCondition';
 import Privacy from '../Pages/Privacypolicy/Privacypolicy';
+import Recipientlogin from '../components/Recipientlogin';
+import RequestBloodForm from '../components/recipientrequest';
 
 function AppRoutes() {
+  const location = useLocation();
+
+  // Define routes where Navbar and Footer should be hidden
+  const noLayoutRoutes = [
+    '/Donorlogin',
+    '/Recipientlogin',
+    '/admin',
+    '/admin/donors',
+    '/admin/recipients',
+    '/admin/hospitals',
+    '/admin/bloodbanks'
+  ];
+
+  // Check if current route matches any of the above
+  const hideLayout = noLayoutRoutes.includes(location.pathname);
+
   return (
     <>
-      <Navbar /> 
+      {!hideLayout && <Navbar />}
+      
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/RegistrationForm1' element={<RegistrationForm1 />} />
         <Route path='/RegistrationForm2' element={<RegistrationForm2 />} />
         <Route path='/RegistrationForm3' element={<RegistrationForm3 />} />
-        <Route path='/resetpassword' element={<ResetPassword/>}/>
-        <Route path='/verifyotp' element={<OtpVerify/>}/>
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path='/view' element={ <KGHospitalInfo/>}/>
-        <Route path='/view2' element={ <IMA/>}/>
-        <Route path='/view3' element={ <Kuppu/>}/>
-        <Route path='/bloodbank' element={<Blood/>}/>
-        <Route path='/hospitalview1' element={ <Devihospital/>}/>
-        <Route path='/hospitalview2' element={ <Corporation/>}/>
-        <Route path='/hospitalview3' element={ <Port/>}/>
-        <Route path='/hospital' element={ <Hospital/>}/>
-        <Route path='/Donorlogin' element={<Donorlogin/>}/>
-        <Route path='/Contact' element={<Contact/>}/>
-        <Route path='/DonateNow' element={<Donor/>}/>
-        <Route path='/DonateNow'  element={<DonationForm/>}/>
-        <Route path="/" element={<AdminDashboard />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/donors" element={<DonorManagement />} />
-        <Route path="/admin/recipients" element={<RecipientManagement />} />
-        <Route path="/admin/hospitals" element={<HospitalManagement />} />
-        <Route path="/admin/bloodbanks" element={<BloodBankManagement />} />
-        <Route path='/services' element={<Service/>}/>
-        <Route path='/faq' element={<FAQ/>}/>
-        <Route path='/terms' element={<Termsandcondition/>}/>
-        <Route path='/Privacypolicy' element={<Privacy/>}/>
+        <Route path='/resetpassword' element={<ResetPassword />} />
+        <Route path='/verifyotp' element={<OtpVerify />} />
+        <Route path='/forgotpassword' element={<ForgotPassword />} />
+        <Route path='/view' element={<KGHospitalInfo />} />
+        <Route path='/view2' element={<IMA />} />
+        <Route path='/view3' element={<Kuppu />} />
+        <Route path='/bloodbank' element={<Blood />} />
+        <Route path='/hospitalview1' element={<Devihospital />} />
+        <Route path='/hospitalview2' element={<Corporation />} />
+        <Route path='/hospitalview3' element={<Port />} />
+        <Route path='/hospital' element={<Hospital />} />
+        <Route path='/Donorlogin' element={<Donorlogin />} />
+        <Route path='/Contact' element={<Contact />} />
+        <Route path='/DonateNow' element={<Donor />} />
+        <Route path='/DonateNow/form' element={<DonationForm />} />
+        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/admin/donors' element={<DonorManagement />} />
+        <Route path='/admin/recipients' element={<RecipientManagement />} />
+        <Route path='/admin/hospitals' element={<HospitalManagement />} />
+        <Route path='/admin/bloodbanks' element={<BloodBankManagement />} />
+        <Route path='/services' element={<Service />} />
+        <Route path='/faq' element={<FAQ />} />
+        <Route path='/terms' element={<Termsandcondition />} />
+        <Route path='/Privacypolicy' element={<Privacy />} />
+        <Route path='/Recipientlogin' element={<Recipientlogin />} />
+        <Route path='/Recipientrequest' element={<RequestBloodForm />} />
       </Routes>
-      <Footer />  
+
+      {!hideLayout && <Footer />}
     </>
   );
-};
+}
 
 export default AppRoutes;
