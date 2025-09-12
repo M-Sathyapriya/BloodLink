@@ -5,9 +5,11 @@ import {
   Grid,
   TextField,
   Typography,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import contactImage from "../Assets/login1.png";
 
 const StyledImage = styled("img")({
@@ -24,6 +26,7 @@ const StyledForm = styled(Box)({
   boxShadow: "0 0 20px rgba(0,0,0,0.1)",
 });
 
+// ✅ Black border + label when clicked
 const StyledTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
     borderRadius: "25px",
@@ -31,6 +34,21 @@ const StyledTextField = styled(TextField)({
     "@media (max-width: 600px)": {
       width: "100%",
     },
+    "& fieldset": {
+      borderColor: "black",
+    },
+    "&:hover fieldset": {
+      borderColor: "black",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "black",
+    },
+  },
+  "& .MuiInputLabel-root": {
+    color: "black",
+  },
+  "& .MuiInputLabel-root.Mui-focused": {
+    color: "black",
   },
 });
 
@@ -49,8 +67,8 @@ const Recipientlogin = () => {
     name: "",
     phone: "",
     bloodGroup: "",
-    lastDonation: "", // ✅ Optional
     password: "",
+    agree: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -66,17 +84,19 @@ const Recipientlogin = () => {
     if (!formData.bloodGroup.trim())
       newErrors.bloodGroup = "Blood group is required";
 
-    // ❌ Removed validation for lastDonation (optional)
-
     if (!formData.password.trim())
       newErrors.password = "Password is required";
+
+    if (!formData.agree)
+      newErrors.agree = "You must agree before logging in";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (field) => (e) => {
-    setFormData({ ...formData, [field]: e.target.value });
+    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [field]: value });
   };
 
   const handleSubmit = (e) => {
@@ -92,8 +112,8 @@ const Recipientlogin = () => {
         name: "",
         phone: "",
         bloodGroup: "",
-        lastDonation: "",
         password: "",
+        agree: false,
       });
       setErrors({});
     }
@@ -176,17 +196,7 @@ const Recipientlogin = () => {
                   variant="outlined"
                 />
 
-                {/* ✅ Last Donation is Optional */}
-                <StyledTextField
-                  type="date"
-                  label="Last Donation (Optional)"
-                  InputLabelProps={{ shrink: true }}
-                  value={formData.lastDonation}
-                  onChange={handleChange("lastDonation")}
-                  variant="outlined"
-                />
-
-                {/* ✅ Password Field */}
+                {/* Password Field */}
                 <StyledTextField
                   type="password"
                   label="Password *"
@@ -197,7 +207,34 @@ const Recipientlogin = () => {
                   variant="outlined"
                 />
 
-                {/* ✅ Forgot Password */}
+                {/* Agree to Terms - Black Checkbox */}
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.agree}
+                      onChange={handleChange("agree")}
+                      sx={{
+                        color: "black",
+                        "&.Mui-checked": {
+                          color: "black",
+                        },
+                      }}
+                    />
+                  }
+                  label={
+                    <Typography variant="body2">
+                      I agree to the <span style={{ color: "red" }}>Terms</span> and{" "}
+                      <span style={{ color: "red" }}>Privacy Policy</span>
+                    </Typography>
+                  }
+                />
+                {errors.agree && (
+                  <Typography color="error" variant="caption">
+                    {errors.agree}
+                  </Typography>
+                )}
+
+                {/* Forgot Password */}
                 <Typography
                   align="left"
                   sx={{
