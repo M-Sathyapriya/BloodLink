@@ -30,6 +30,8 @@ import Service from '../Pages/Services/Servicemain';
 import FAQ from '../Pages/faq/faq';
 import Termsandcondition from '../Pages/Termsandcondition/TermsandCondition';
 import Privacy from '../Pages/Privacypolicy/Privacypolicy';
+import Aboutus from '../Pages/About Us/AboutUs';
+import AdminLogin from '../Pages/admin/Adminlogin';
 
 function AppRoutes() {
   return (
@@ -66,6 +68,8 @@ function AppRoutes() {
         <Route path='/faq' element={<FAQ/>}/>
         <Route path='/terms' element={<Termsandcondition/>}/>
         <Route path='/Privacypolicy' element={<Privacy/>}/>
+        <Route path='/about' element={<Aboutus/>}/>
+        <Route path='/adminlogin' element={<AdminLogin/>}/>
       </Routes>
       <Footer />  
     </>

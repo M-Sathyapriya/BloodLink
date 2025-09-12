@@ -7,18 +7,14 @@ import {
   IconButton,
 } from "@mui/material";
 import { Facebook, Twitter, Instagram, Pinterest } from "@mui/icons-material";
-import image1 from "../Assets/footer1.png";
-import image2 from "../Assets/footer2.png"
-import { useNavigate } from "react-router-dom"; // ✅ Import navigate hook
+import { useNavigate } from "react-router-dom";
 
 import footer1 from "../Assets/footer1.png";
 import footer2 from "../Assets/footer2.png";
 
-
 const Footer = () => {
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const navigate = useNavigate();
 
-  // ✅ Define routes for quick links
   const quickLinks = [
     { label: "Services", path: "/services" },
     { label: "About Us", path: "/about" },
@@ -61,7 +57,7 @@ const Footer = () => {
             px: 3,
             "&:hover": { bgcolor: "#f5f5f5" },
           }}
-          onClick={() => navigate("/contact")} // ✅ Navigate to Contact Page
+          onClick={() => navigate("/contact")}
         >
           Contact Us
         </Button>
@@ -139,7 +135,7 @@ const Footer = () => {
 
             <Box display="flex" alignItems="center" gap={2} mb={2}>
               <img
-                src={footer1} // ✅ Local image
+                src={footer1}
                 alt="news1"
                 style={{ borderRadius: "4px", width: "60px", height: "60px" }}
               />
@@ -155,7 +151,7 @@ const Footer = () => {
 
             <Box display="flex" alignItems="center" gap={2}>
               <img
-                src={footer2} // ✅ Local image
+                src={footer2}
                 alt="news2"
                 style={{ borderRadius: "4px", width: "60px", height: "60px" }}
               />
@@ -232,14 +228,34 @@ const Footer = () => {
           </Box>
         </Box>
 
-        {/* Copyright */}
-        <Typography
-          variant="body2"
-          align="center"
-          sx={{ color: "white", mt: 3 }}
+        {/* Copyright + Admin Login */}
+        <Box
+          sx={{
+            mt: 3,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
         >
-          Copyright © 2025 Bloodlink. All rights reserved
-        </Typography>
+          <Typography variant="body2" sx={{ color: "white" }}>
+            Copyright © 2025 Bloodlink. All rights reserved
+          </Typography>
+
+          {/* 🔑 Admin Login Link */}
+          <Typography
+            variant="body2"
+            sx={{
+              color: "gray",
+              cursor: "pointer",
+              fontSize: "12px",
+              "&:hover": { color: "white" },
+            }}
+            onClick={() => navigate("/adminlogin")}
+          >
+            Admin Login
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
