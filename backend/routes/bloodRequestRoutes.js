@@ -8,9 +8,16 @@ import {
 
 const router = express.Router();
 
+// POST - submit a blood request
 router.post("/submit", submitBloodRequest);
+
+// GET - get all blood requests
 router.get("/all", getAllBloodRequests);
-router.put("/update/:id", updateBloodRequest);
-router.delete("/delete/:id", deleteBloodRequest);
+
+// PUT - update blood request by id
+router.put("/:id", updateBloodRequest);
+
+// DELETE - delete blood request by id
+router.delete("/:id", deleteBloodRequest);
 
 export default router;

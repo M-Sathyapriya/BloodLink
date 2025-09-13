@@ -1,10 +1,10 @@
 import BloodRequest from "../Models/BloodRequest.js";
 
-// ✅ Create (Submit) blood request
+// Create (Submit) blood request
 export const submitBloodRequest = async (req, res) => {
   try {
     console.log("📥 Received Payload:", req.body);
-    console.log("Fetched Requests:", requests);
+
     const newRequest = new BloodRequest({
       patientName: {
         first: req.body.patientName?.first,
@@ -39,7 +39,7 @@ export const submitBloodRequest = async (req, res) => {
   }
 };
 
-// ✅ Get all requests
+// Get all requests
 export const getAllBloodRequests = async (req, res) => {
   try {
     const requests = await BloodRequest.find().sort({ createdAt: -1 });
@@ -50,7 +50,7 @@ export const getAllBloodRequests = async (req, res) => {
   }
 };
 
-// ✅ Update request
+// Update request
 export const updateBloodRequest = async (req, res) => {
   try {
     const updated = await BloodRequest.findByIdAndUpdate(req.params.id, req.body, {
@@ -64,7 +64,7 @@ export const updateBloodRequest = async (req, res) => {
   }
 };
 
-// ✅ Delete request
+// Delete request
 export const deleteBloodRequest = async (req, res) => {
   try {
     const deleted = await BloodRequest.findByIdAndDelete(req.params.id);
