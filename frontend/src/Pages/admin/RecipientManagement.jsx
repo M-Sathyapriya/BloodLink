@@ -36,7 +36,7 @@ export default function RecipientManagement() {
 
   const fetchRecipients = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/api/bloodrequest/all");
+      const res = await axios.get("http://localhost:3001/api/blood-request/all");
       console.log("Recipients from API:", res.data);
       setRecipients(res.data);     
     } catch (err) {
@@ -49,7 +49,7 @@ export default function RecipientManagement() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this request?")) return;
     try {
-      await axios.delete(`http://localhost:3001/api/bloodrequest/delete/${id}`);
+      await axios.delete(`http://localhost:3001/api/blood-request/delete/${id}`);
       setRecipients((prev) => prev.filter((r) => r._id !== id));
     } catch (err) {
       console.error("❌ Error deleting recipient:", err);

@@ -95,7 +95,7 @@ const Navbar = () => {
             {[
               { label: "Home", to: "/" },
               { label: "About Us", to: "/about" },
-              { label: "Services", to: "/service" },
+              { label: "Services", to: "/services" },
               { label: "Blood Bank", to: "/bloodbank" },
               { label: "Hospital", to: "/hospital" },
             ].map((item) => (

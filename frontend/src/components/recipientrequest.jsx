@@ -72,11 +72,30 @@ const RequestBloodForm = () => {
 
   const validate = () => {
     let temp = {};
+    temp.patientFirst = formData.patientFirst ? "" : "First name is required";
+    temp.patientLast = formData.patientLast ? "" : "Last name is required";
+    temp.attendeeFirst = formData.attendeeFirst ? "" : "First name is required";
+    temp.attendeeLast = formData.attendeeLast ? "" : "Last name is required";
     temp.attendeeEmail = /\S+@\S+\.\S+/.test(formData.attendeeEmail)
       ? ""
       : "Enter valid email";
     temp.attendeePhone =
       formData.attendeePhone.length === 10 ? "" : "Enter valid phone";
+    temp.bloodGroup = formData.bloodGroup ? "" : "Blood group is required";
+    temp.requiredDate = formData.requiredDate ? "" : "Required date is required";
+    temp.quantity =
+      formData.quantity && Number(formData.quantity) > 0
+        ? ""
+        : "Quantity must be greater than 0";
+    temp.requestType = formData.requestType ? "" : "Request type is required";
+    temp.state = formData.state ? "" : "State is required";
+    temp.city = formData.city ? "" : "City is required";
+    temp.hospitalName = formData.hospitalName ? "" : "Hospital name is required";
+    temp.hospitalAddress = formData.hospitalAddress
+      ? ""
+      : "Hospital address is required";
+    temp.pincode = formData.pincode ? "" : "Pincode is required";
+    temp.urgency = formData.urgency ? "" : "Urgency level is required";
     temp.captchaInput =
       formData.captchaInput === captcha ? "" : "Captcha does not match";
     temp.agree = formData.agree ? "" : "You must agree to continue";
@@ -118,7 +137,7 @@ const RequestBloodForm = () => {
         };
 
         const response = await axios.post(
-          "http://localhost:3001/api/requestblood/submit",
+          "http://localhost:3001/api/request-blood/submit",
           payload
         );
 
@@ -197,6 +216,14 @@ const RequestBloodForm = () => {
                     name={field}
                     value={formData[field]}
                     onChange={handleChange}
+                    error={
+                      (field === "patientFirst" && !!errors.patientFirst) ||
+                      (field === "patientLast" && !!errors.patientLast)
+                    }
+                    helperText={
+                      (field === "patientFirst" && errors.patientFirst) ||
+                      (field === "patientLast" && errors.patientLast)
+                    }
                   />
                 </Grid>
               ))}
@@ -219,6 +246,14 @@ const RequestBloodForm = () => {
                       name={field}
                       value={formData[field]}
                       onChange={handleChange}
+                      error={
+                        (field === "attendeeFirst" && !!errors.attendeeFirst) ||
+                        (field === "attendeeLast" && !!errors.attendeeLast)
+                      }
+                      helperText={
+                        (field === "attendeeFirst" && errors.attendeeFirst) ||
+                        (field === "attendeeLast" && errors.attendeeLast)
+                      }
                     />
                   </Grid>
                 )
@@ -272,6 +307,8 @@ const RequestBloodForm = () => {
               name="bloodGroup"
               value={formData.bloodGroup}
               onChange={handleChange}
+              error={!!errors.bloodGroup}
+              helperText={errors.bloodGroup}
             >
               {bloodGroups.map((bg) => (
                 <MenuItem key={bg} value={bg}>
@@ -294,6 +331,8 @@ const RequestBloodForm = () => {
               value={formData.requiredDate}
               onChange={handleChange}
               InputLabelProps={{ shrink: true }}
+              error={!!errors.requiredDate}
+              helperText={errors.requiredDate}
             />
           </Grid>
 
@@ -309,6 +348,8 @@ const RequestBloodForm = () => {
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
+              error={!!errors.quantity}
+              helperText={errors.quantity}
             />
           </Grid>
 
@@ -324,6 +365,8 @@ const RequestBloodForm = () => {
               name="requestType"
               value={formData.requestType}
               onChange={handleChange}
+              error={!!errors.requestType}
+              helperText={errors.requestType}
             >
               {requestTypes.map((rt) => (
                 <MenuItem key={rt} value={rt}>
@@ -345,6 +388,8 @@ const RequestBloodForm = () => {
               name="state"
               value={formData.state}
               onChange={handleChange}
+              error={!!errors.state}
+              helperText={errors.state}
             >
               {states.map((s) => (
                 <MenuItem key={s} value={s}>
@@ -366,6 +411,8 @@ const RequestBloodForm = () => {
               name="city"
               value={formData.city}
               onChange={handleChange}
+              error={!!errors.city}
+              helperText={errors.city}
             >
               {cities.map((c) => (
                 <MenuItem key={c} value={c}>
@@ -383,10 +430,12 @@ const RequestBloodForm = () => {
             <TextField
               fullWidth
               size="small"
-              name="hospitalName"
               placeholder="Enter Hospital Name"
+              name="hospitalName"
               value={formData.hospitalName}
               onChange={handleChange}
+              error={!!errors.hospitalName}
+              helperText={errors.hospitalName}
             />
           </Grid>
 
@@ -398,12 +447,12 @@ const RequestBloodForm = () => {
             <TextField
               fullWidth
               size="small"
-              name="hospitalAddress"
-              multiline
-              rows={2}
               placeholder="Enter Hospital Address"
+              name="hospitalAddress"
               value={formData.hospitalAddress}
               onChange={handleChange}
+              error={!!errors.hospitalAddress}
+              helperText={errors.hospitalAddress}
             />
           </Grid>
 
@@ -415,16 +464,18 @@ const RequestBloodForm = () => {
             <TextField
               fullWidth
               size="small"
-              name="pincode"
               placeholder="Enter Pincode"
+              name="pincode"
               value={formData.pincode}
               onChange={handleChange}
+              error={!!errors.pincode}
+              helperText={errors.pincode}
             />
           </Grid>
 
           {/* Urgency */}
           <Grid item xs={4}>
-            <Typography variant="body2">Urgency Level *</Typography>
+            <Typography variant="body2">Urgency *</Typography>
           </Grid>
           <Grid item xs={8}>
             <TextField
@@ -434,6 +485,8 @@ const RequestBloodForm = () => {
               name="urgency"
               value={formData.urgency}
               onChange={handleChange}
+              error={!!errors.urgency}
+              helperText={errors.urgency}
             >
               {urgencyLevels.map((u) => (
                 <MenuItem key={u} value={u}>
@@ -445,16 +498,15 @@ const RequestBloodForm = () => {
 
           {/* Note */}
           <Grid item xs={4}>
-            <Typography variant="body2">Note to Donors</Typography>
+            <Typography variant="body2">Note (Optional)</Typography>
           </Grid>
           <Grid item xs={8}>
             <TextField
               fullWidth
-              size="small"
-              name="note"
               multiline
-              rows={2}
-              placeholder="Optional"
+              rows={3}
+              placeholder="Any additional information"
+              name="note"
               value={formData.note}
               onChange={handleChange}
             />
@@ -464,39 +516,43 @@ const RequestBloodForm = () => {
           <Grid item xs={4}>
             <Typography variant="body2">Captcha *</Typography>
           </Grid>
-          <Grid item xs={8}>
-            <Grid container spacing={1} alignItems="center">
-              <Grid
-                item
-                sx={{
-                  p: 1,
-                  border: "1px dashed gray",
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                  userSelect: "none",
-                }}
-              >
-                {captcha}
-              </Grid>
-              <Grid item xs>
-                <TextField
-                  fullWidth
-                  size="small"
-                  placeholder="Enter Captcha"
-                  name="captchaInput"
-                  value={formData.captchaInput}
-                  onChange={handleChange}
-                  error={!!errors.captchaInput}
-                  helperText={errors.captchaInput}
-                />
-              </Grid>
-              <Grid item>
-                <Button onClick={generateCaptcha}>↻</Button>
-              </Grid>
-            </Grid>
+          <Grid
+            item
+            xs={8}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
+            <Box
+              sx={{
+                padding: "5px 15px",
+                border: "1px solid #ccc",
+                fontWeight: "bold",
+                letterSpacing: "4px",
+                fontSize: "1.2rem",
+                userSelect: "none",
+                backgroundColor: "#f4f4f4",
+              }}
+            >
+              {captcha}
+            </Box>
+            <TextField
+              size="small"
+              placeholder="Enter Captcha"
+              name="captchaInput"
+              value={formData.captchaInput}
+              onChange={handleChange}
+              error={!!errors.captchaInput}
+              helperText={errors.captchaInput}
+            />
+            <Button variant="outlined" size="small" onClick={generateCaptcha}>
+              Refresh
+            </Button>
           </Grid>
 
-          {/* Checkbox */}
+          {/* Agree Checkbox */}
           <Grid item xs={12}>
             <FormControlLabel
               control={
@@ -504,35 +560,21 @@ const RequestBloodForm = () => {
                   checked={formData.agree}
                   onChange={handleChange}
                   name="agree"
+                  color="primary"
                 />
               }
-              label={
-                <Typography variant="body2">
-                  I have read and agree to the{" "}
-                  <span style={{ color: "red" }}>Terms & Conditions</span> and{" "}
-                  <span style={{ color: "red" }}>Privacy Policy</span>
-                </Typography>
-              }
+              label="I agree to the terms and conditions"
             />
             {errors.agree && (
-              <Typography color="error" variant="caption">
+              <Typography variant="caption" color="error" display="block">
                 {errors.agree}
               </Typography>
             )}
           </Grid>
 
           {/* Submit Button */}
-          <Grid item xs={12}>
-            <Button
-              fullWidth
-              type="submit"
-              variant="contained"
-              sx={{
-                backgroundColor: "#b71c1c",
-                "&:hover": { backgroundColor: "#900" },
-                borderRadius: "20px",
-              }}
-            >
+          <Grid item xs={12} textAlign="center">
+            <Button variant="contained" type="submit">
               Submit Request
             </Button>
           </Grid>
@@ -542,11 +584,17 @@ const RequestBloodForm = () => {
       {/* Success Snackbar */}
       <Snackbar
         open={success}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
         onClose={() => setSuccess(false)}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert severity="success">Successfully Submitted!</Alert>
+        <Alert
+          onClose={() => setSuccess(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Blood request submitted successfully!
+        </Alert>
       </Snackbar>
     </Box>
   );
