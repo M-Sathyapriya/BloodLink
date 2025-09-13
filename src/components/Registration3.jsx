@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import {
-  Box,
-  Button,
-  MenuItem,
-  TextField,
-  Typography,
-  Paper,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  FormHelperText,
+  Box, Button, MenuItem, TextField, Typography, Paper,
+  FormControlLabel, Checkbox, Link, FormHelperText
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom"; // ✅ Navigation hook
 
 const roles = ["Donor", "Receiver", "Admin"];
 
@@ -26,42 +20,27 @@ function generateCaptchaText(length = 6) {
 }
 
 const textFieldBlackFocusSx = {
-  "& .MuiOutlinedInput-root": {
-    "&.Mui-focused fieldset": {
-      borderColor: "black",
-    },
-  },
-  "& .MuiInputLabel-root.Mui-focused": {
-    color: "black",
-  },
+  "& .MuiOutlinedInput-root": { "&.Mui-focused fieldset": { borderColor: "black" } },
+  "& .MuiInputLabel-root.Mui-focused": { color: "black" },
 };
 
 const RegistrationForm3 = () => {
   const [captchaText, setCaptchaText] = useState("");
   const canvasRef = useRef(null);
+  const navigate = useNavigate(); // ✅ Used for redirection
 
-  const regenerateCaptcha = () => {
-    const newCaptcha = generateCaptchaText(6);
-    setCaptchaText(newCaptcha);
-  };
+  const regenerateCaptcha = () => setCaptchaText(generateCaptchaText(6));
 
-  useEffect(() => {
-    regenerateCaptcha();
-  }, []);
+  useEffect(() => { regenerateCaptcha(); }, []);
 
   useEffect(() => {
     if (!canvasRef.current) return;
     const ctx = canvasRef.current.getContext("2d");
-    const width = 180;
-    const height = 40;
-
+    const width = 180, height = 40;
     ctx.clearRect(0, 0, width, height);
-
-    // Background
     ctx.fillStyle = "#ffeaea";
     ctx.fillRect(0, 0, width, height);
 
-    // Random lines for distortion
     for (let i = 0; i < 6; i++) {
       ctx.strokeStyle = `rgba(177, 39, 39, ${Math.random() * 0.3 + 0.2})`;
       ctx.beginPath();
@@ -70,7 +49,6 @@ const RegistrationForm3 = () => {
       ctx.stroke();
     }
 
-    // Draw captcha characters with rotation
     ctx.font = "22px Arial";
     ctx.fillStyle = "#b12727";
     ctx.textBaseline = "middle";
@@ -81,7 +59,6 @@ const RegistrationForm3 = () => {
       const x = 15 + i * 20;
       const y = height / 2 + (Math.random() * 6 - 3);
       const angle = Math.random() * 0.3 - 0.15;
-
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(angle);
@@ -92,17 +69,15 @@ const RegistrationForm3 = () => {
 
   const validationSchema = Yup.object({
     role: Yup.string().required("Role is required"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .required("Password is required"),
+    password: Yup.string().min(8, "Password must be at least 8 characters").required("Password is required"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
       .required("Confirm Password is required"),
     captchaInput: Yup.string()
       .required("Captcha is required")
-      .test("captcha-match", "Captcha does not match", function (value) {
-        return value?.toLowerCase() === captchaText.toLowerCase();
-      }),
+      .test("captcha-match", "Captcha does not match", value =>
+        value?.toLowerCase() === captchaText.toLowerCase()
+      ),
     termsChecked: Yup.boolean()
       .oneOf([true], "You must agree to terms and conditions")
       .required("Terms must be accepted"),
@@ -118,11 +93,35 @@ const RegistrationForm3 = () => {
     },
     validationSchema,
     validateOnChange: false,
-    validateOnBlur: true,
-    onSubmit: (values, { resetForm }) => {
-      alert("✅ Registration Successful!");
-      resetForm();
-      regenerateCaptcha();
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const form1 = JSON.parse(localStorage.getItem("registrationForm1")) || {};
+        const form2 = JSON.parse(localStorage.getItem("registrationForm2")) || {};
+        const fullData = {
+          ...form1,
+          ...form2,
+          role: values.role,
+          password: values.password,
+        };
+
+        await axios.post("http://localhost:3001/api/registration/register", fullData);
+        alert("✅ Registration Successful!");
+
+        resetForm();
+        localStorage.clear();
+
+        // ✅ Conditional Navigation Based on Role
+        if (values.role === "Donor") {
+          navigate("/Donorlogin");
+        } else if (values.role === "Receiver") {
+          navigate("/Recipientlogin");
+        } else {
+          navigate("/"); // Fallback
+        }
+
+      } catch (err) {
+        alert(err.response?.data?.message || "❌ Registration Failed");
+      }
     },
   });
 
@@ -136,7 +135,6 @@ const RegistrationForm3 = () => {
         borderRadius: 2,
         border: "1px solid #ccc",
         mt: 4,
-        fontFamily: "'Roboto', sans-serif",
       }}
     >
       <Typography
@@ -144,7 +142,11 @@ const RegistrationForm3 = () => {
         fontWeight="bold"
         textAlign="center"
         mb={3}
-        sx={{ borderBottom: "2px solid #b12727", display: "inline-block", pb: 0.5 }}
+        sx={{
+          borderBottom: "2px solid #b12727",
+          display: "inline-block",
+          pb: 0.5,
+        }}
       >
         Registration Form
       </Typography>
@@ -182,7 +184,6 @@ const RegistrationForm3 = () => {
           type="password"
           name="password"
           label="Password *"
-          placeholder="At least 8 characters"
           fullWidth
           margin="normal"
           sx={textFieldBlackFocusSx}
@@ -196,7 +197,6 @@ const RegistrationForm3 = () => {
           type="password"
           name="confirmPassword"
           label="Confirm Password *"
-          placeholder="Password and Confirm Password Must be Same"
           fullWidth
           margin="normal"
           sx={textFieldBlackFocusSx}
@@ -206,28 +206,29 @@ const RegistrationForm3 = () => {
           helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
         />
 
-        <Box display="flex" alignItems="center" gap={2} mt={2} mb={formik.errors.captchaInput ? 0 : 2}>
+        <Box mt={2} mb={1} display="flex" alignItems="center">
           <canvas
             ref={canvasRef}
-            width={140}
+            width={180}
             height={40}
-            style={{ borderRadius: 4, border: "1px solid #ddd", backgroundColor: "#fff0f0", cursor: "pointer" }}
-            onClick={regenerateCaptcha}
-            title="Click to refresh captcha"
+            style={{ border: "1px solid #ccc", marginRight: 10 }}
           />
-          <TextField
-            name="captchaInput"
-            label="Enter Captcha *"
-            value={formik.values.captchaInput}
-            onChange={formik.handleChange}
-            error={formik.touched.captchaInput && Boolean(formik.errors.captchaInput)}
-            helperText={
-              (formik.touched.captchaInput && formik.errors.captchaInput) ||
-              "Click captcha to refresh"
-            }
-            sx={{ flex: 1 }}
-          />
+          <Button variant="outlined" color="error" onClick={regenerateCaptcha}>
+            Refresh
+          </Button>
         </Box>
+
+        <TextField
+          name="captchaInput"
+          label="Enter Captcha *"
+          fullWidth
+          margin="normal"
+          sx={textFieldBlackFocusSx}
+          value={formik.values.captchaInput}
+          onChange={formik.handleChange}
+          error={formik.touched.captchaInput && Boolean(formik.errors.captchaInput)}
+          helperText={formik.touched.captchaInput && formik.errors.captchaInput}
+        />
 
         <FormControlLabel
           control={
@@ -235,19 +236,11 @@ const RegistrationForm3 = () => {
               name="termsChecked"
               checked={formik.values.termsChecked}
               onChange={formik.handleChange}
-              color="primary"
             />
           }
           label={
-            <Typography variant="body2" color="textPrimary">
-              I have read and agree the{" "}
-              <Link href="#" underline="hover" color="#b12727">
-                Terms & Conditions
-              </Link>{" "}
-              and{" "}
-              <Link href="#" underline="hover" color="#b12727">
-                Privacy Policy
-              </Link>
+            <Typography fontSize={14}>
+              I agree to <Link href="#">Terms and Conditions</Link> *
             </Typography>
           }
         />
@@ -255,25 +248,19 @@ const RegistrationForm3 = () => {
           <FormHelperText error>{formik.errors.termsChecked}</FormHelperText>
         )}
 
-        <Box textAlign="center" mt={4}>
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{
-              backgroundColor: "#b12727",
-              px: 4,
-              py: 1.5,
-              borderRadius: 2,
-              textTransform: "none",
-              fontWeight: "medium",
-              "&:hover": {
-                backgroundColor: "#8b1b1b",
-              },
-            }}
-          >
-            Register Now
-          </Button>
-        </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{
+            mt: 2,
+            py: 1.5,
+            backgroundColor: "#b12727",
+            "&:hover": { backgroundColor: "#800000" },
+          }}
+        >
+          Register
+        </Button>
       </form>
     </Paper>
   );

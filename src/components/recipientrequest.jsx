@@ -1,5 +1,6 @@
 // RequestBloodForm.jsx
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -84,34 +85,75 @@ const RequestBloodForm = () => {
     return Object.values(temp).every((x) => x === "");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (validate()) {
-      setSuccess(true);
-      setFormData({
-        patientFirst: "",
-        patientMid: "",
-        patientLast: "",
-        attendeeFirst: "",
-        attendeeMid: "",
-        attendeeLast: "",
-        attendeeEmail: "",
-        attendeePhone: "",
-        bloodGroup: "",
-        requiredDate: "",
-        quantity: "",
-        requestType: "",
-        state: "",
-        city: "",
-        hospitalName: "",
-        hospitalAddress: "",
-        pincode: "",
-        urgency: "",
-        note: "",
-        captchaInput: "",
-        agree: false,
-      });
-      generateCaptcha();
+      try {
+        // ✅ Transform data to match backend schema
+        const payload = {
+          patientName: {
+            first: formData.patientFirst,
+            mid: formData.patientMid,
+            last: formData.patientLast,
+          },
+          attendee: {
+            first: formData.attendeeFirst,
+            mid: formData.attendeeMid,
+            last: formData.attendeeLast,
+            email: formData.attendeeEmail,
+            phone: formData.attendeePhone,
+          },
+          bloodGroup: formData.bloodGroup,
+          requiredDate: formData.requiredDate,
+          quantity: Number(formData.quantity),
+          requestType: formData.requestType,
+          state: formData.state,
+          city: formData.city,
+          hospitalName: formData.hospitalName,
+          hospitalAddress: formData.hospitalAddress,
+          pincode: formData.pincode,
+          urgency: formData.urgency,
+          note: formData.note,
+        };
+
+        const response = await axios.post(
+          "http://localhost:3001/api/requestblood/submit",
+          payload
+        );
+
+        if (response.status === 201 || response.status === 200) {
+          setSuccess(true);
+          // Reset form after successful submission
+          setFormData({
+            patientFirst: "",
+            patientMid: "",
+            patientLast: "",
+            attendeeFirst: "",
+            attendeeMid: "",
+            attendeeLast: "",
+            attendeeEmail: "",
+            attendeePhone: "",
+            bloodGroup: "",
+            requiredDate: "",
+            quantity: "",
+            requestType: "",
+            state: "",
+            city: "",
+            hospitalName: "",
+            hospitalAddress: "",
+            pincode: "",
+            urgency: "",
+            note: "",
+            captchaInput: "",
+            agree: false,
+          });
+          generateCaptcha();
+        }
+      } catch (error) {
+        console.error("❌ Error submitting blood request:", error);
+        alert("Something went wrong. Please try again later.");
+      }
     }
   };
 
@@ -155,11 +197,6 @@ const RequestBloodForm = () => {
                     name={field}
                     value={formData[field]}
                     onChange={handleChange}
-                    sx={{
-                      "& .MuiOutlinedInput-root.Mui-focused fieldset": {
-                        borderColor: "black",
-                      },
-                    }}
                   />
                 </Grid>
               ))}
@@ -182,11 +219,6 @@ const RequestBloodForm = () => {
                       name={field}
                       value={formData[field]}
                       onChange={handleChange}
-                      sx={{
-                        "& .MuiOutlinedInput-root.Mui-focused fieldset": {
-                          borderColor: "black",
-                        },
-                      }}
                     />
                   </Grid>
                 )
@@ -208,11 +240,6 @@ const RequestBloodForm = () => {
               onChange={handleChange}
               error={!!errors.attendeeEmail}
               helperText={errors.attendeeEmail}
-              sx={{
-                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
-                  borderColor: "black",
-                },
-              }}
             />
           </Grid>
 
@@ -230,11 +257,6 @@ const RequestBloodForm = () => {
               onChange={handleChange}
               error={!!errors.attendeePhone}
               helperText={errors.attendeePhone}
-              sx={{
-                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
-                  borderColor: "black",
-                },
-              }}
             />
           </Grid>
 
@@ -250,11 +272,6 @@ const RequestBloodForm = () => {
               name="bloodGroup"
               value={formData.bloodGroup}
               onChange={handleChange}
-              sx={{
-                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
-                  borderColor: "black",
-                },
-              }}
             >
               {bloodGroups.map((bg) => (
                 <MenuItem key={bg} value={bg}>
@@ -264,7 +281,7 @@ const RequestBloodForm = () => {
             </TextField>
           </Grid>
 
-          {/* Date */}
+          {/* Required Date */}
           <Grid item xs={4}>
             <Typography variant="body2">Required Date *</Typography>
           </Grid>
@@ -366,8 +383,8 @@ const RequestBloodForm = () => {
             <TextField
               fullWidth
               size="small"
-              placeholder="Enter Hospital Name"
               name="hospitalName"
+              placeholder="Enter Hospital Name"
               value={formData.hospitalName}
               onChange={handleChange}
             />
@@ -381,10 +398,10 @@ const RequestBloodForm = () => {
             <TextField
               fullWidth
               size="small"
-              placeholder="Enter Hospital Address"
+              name="hospitalAddress"
               multiline
               rows={2}
-              name="hospitalAddress"
+              placeholder="Enter Hospital Address"
               value={formData.hospitalAddress}
               onChange={handleChange}
             />
@@ -398,8 +415,8 @@ const RequestBloodForm = () => {
             <TextField
               fullWidth
               size="small"
-              placeholder="Enter Pincode"
               name="pincode"
+              placeholder="Enter Pincode"
               value={formData.pincode}
               onChange={handleChange}
             />
@@ -434,10 +451,10 @@ const RequestBloodForm = () => {
             <TextField
               fullWidth
               size="small"
-              placeholder="Optional"
+              name="note"
               multiline
               rows={2}
-              name="note"
+              placeholder="Optional"
               value={formData.note}
               onChange={handleChange}
             />
@@ -491,7 +508,7 @@ const RequestBloodForm = () => {
               }
               label={
                 <Typography variant="body2">
-                  I have read and agree the{" "}
+                  I have read and agree to the{" "}
                   <span style={{ color: "red" }}>Terms & Conditions</span> and{" "}
                   <span style={{ color: "red" }}>Privacy Policy</span>
                 </Typography>
@@ -504,7 +521,7 @@ const RequestBloodForm = () => {
             )}
           </Grid>
 
-          {/* Submit */}
+          {/* Submit Button */}
           <Grid item xs={12}>
             <Button
               fullWidth
